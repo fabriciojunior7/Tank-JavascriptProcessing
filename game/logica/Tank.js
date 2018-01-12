@@ -4,6 +4,7 @@ function Tank(x, y, imagem){
 	Entidade.call(this, x, y, imagem, "tank");
 	this.wasd = [false, false, false, false];
 	this.velocidade = 2;
+	this.reload = 0;
 
 	//Metodos
 	this.mover = function () {
@@ -59,6 +60,10 @@ function Tank(x, y, imagem){
 		else if(key == 83 || key == 40){
 			this.wasd[2] = true;
 		}
+		//Tiro
+		if(key == 32){
+			this.atirar();
+		}
 	}
 
 	this.botaoSolto = function (key) {
@@ -75,6 +80,13 @@ function Tank(x, y, imagem){
 		}
 		else if(key == 83 || key == 40){
 			this.wasd[2] = false;
+		}
+	}
+
+	this.atirar = function(){
+		if(this.reload >= 0.2){
+			projeteis.push(new Bala(this.x, this.y, this.rotacao));
+			this.reload = 0;
 		}
 	}
 
